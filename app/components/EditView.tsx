@@ -26,9 +26,6 @@ const EditView: React.FC<IProps> = ({ setViewState }) => {
       <Button title="Submit" onPress={onSubmit}>
         Submit
       </Button>
-      <Button title="Cancel" onPress={() => setViewState("default")}>
-        Cancel
-      </Button>
     </>
   );
 };

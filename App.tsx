@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Button } from "react-native";
 
 import { DefaultView, EditView } from "./app/components";
 
@@ -10,9 +10,19 @@ const App = () => {
   return (
     <View style={styles.container}>
       {viewState === "default" ? (
-        <DefaultView setViewState={setViewState} />
+        <>
+          <DefaultView />
+          <Button title="Add new Item" onPress={() => setViewState("edit")}>
+            Add new Item
+          </Button>
+        </>
       ) : (
-        <EditView setViewState={setViewState} />
+        <>
+          <EditView setViewState={setViewState} />
+          <Button title="Cancel" onPress={() => setViewState("default")}>
+            Cancel
+          </Button>
+        </>
       )}
     </View>
   );
