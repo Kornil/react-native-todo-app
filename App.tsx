@@ -7,19 +7,23 @@ export type viewState = "default" | "edit";
 
 const App = () => {
   const [viewState, setViewState] = React.useState<viewState>("default");
+
+  const handleNewPress = () => setViewState("edit");
+  const handleCancelPress = () => setViewState("default");
+
   return (
     <View style={styles.container}>
       {viewState === "default" ? (
         <>
           <DefaultView />
-          <Button title="Add new Item" onPress={() => setViewState("edit")}>
+          <Button title="Add new Item" onPress={handleNewPress}>
             Add new Item
           </Button>
         </>
       ) : (
         <>
-          <EditView setViewState={setViewState} />
-          <Button title="Cancel" onPress={() => setViewState("default")}>
+          <EditView setViewState={handleCancelPress} />
+          <Button title="Cancel" onPress={handleCancelPress}>
             Cancel
           </Button>
         </>

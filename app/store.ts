@@ -7,11 +7,16 @@ export interface Item {
   name: string;
 }
 
-export const addItem = async (item: Item) => {
+type actionType = (item: Item) => Promise<void>;
+
+// add a new todo
+export const addItem: actionType = async (item: Item) => {
   try {
     const storedItems: Item[] = JSON.parse(
       await AsyncStorage.getItem(ITEMS_KEY)
     );
+    // itemsArray will be null if there are no elements
+    // we need to make it an array in that case
     const itemsArray = storedItems || [];
     await AsyncStorage.setItem(
       ITEMS_KEY,
@@ -22,7 +27,8 @@ export const addItem = async (item: Item) => {
   }
 };
 
-export const deleteItem = async (item: Item) => {
+// remove an existing todo
+export const deleteItem: actionType = async (item: Item) => {
   try {
     const storedItems: Item[] = JSON.parse(
       await AsyncStorage.getItem(ITEMS_KEY)
@@ -36,12 +42,17 @@ export const deleteItem = async (item: Item) => {
   }
 };
 
-export const getItems = async () => {
+type getItemsType = () => Promise<Array<Item>>;
+
+// list all todos
+export const getItems: getItemsType = async () => {
   try {
-    const itemsArray = await AsyncStorage.getItem(ITEMS_KEY);
-    return JSON.parse(itemsArray);
+    const itemsArray: Item[] = JSON.parse(
+      await AsyncStorage.getItem(ITEMS_KEY)
+    );
+    return itemsArray;
   } catch (error) {
     console.error(error);
-    return [];
   }
+  return [];
 };

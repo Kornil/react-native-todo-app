@@ -11,10 +11,12 @@ interface IProps {
 
 const EditView: React.FC<IProps> = ({ setViewState }) => {
   const [itemName, setItemName] = React.useState<string>("");
+
   const onSubmit = async () => {
     await addItem({ id: uuidv4(), name: itemName });
     setViewState("default");
   };
+
   return (
     <>
       <Text>Add a new Item</Text>
