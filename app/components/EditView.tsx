@@ -1,6 +1,5 @@
 import React from "react";
 import { Text, TextInput, Button } from "react-native";
-import uuidv4 from "uuid/v4";
 
 import { addItem } from "../store";
 import { viewState } from "../../App";
@@ -13,7 +12,7 @@ const EditView: React.FC<IProps> = ({ setViewState }) => {
   const [itemName, setItemName] = React.useState<string>("");
 
   const onSubmit = async () => {
-    await addItem({ id: uuidv4(), name: itemName });
+    await addItem(itemName);
     setViewState("default");
   };
 

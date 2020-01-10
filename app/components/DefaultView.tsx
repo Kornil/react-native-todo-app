@@ -8,7 +8,13 @@ const DefaultView: React.FC = () => {
   const [data, setData] = React.useState<Array<Item>>([]);
 
   React.useEffect(() => {
-    getItems().then((items: Item[]) => setData(items));
+    // isMounted unsubscribes React from the async operation
+    // if the component is unmounted
+    let isMounted = true;
+    getItems().then((items: Item[]) => {
+      if (isMounted) setData(items);
+    });
+    return () => (isMounted = false);
   }, [data]);
 
   return (

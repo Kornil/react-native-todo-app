@@ -7,15 +7,13 @@ interface IProps {
   item: Item;
 }
 
-const ListItem: React.FC<IProps> = ({ item }) => {
-  return (
-    <>
-      <Text>{item.name}</Text>
-      <Button title="Delete" onPress={() => deleteItem(item)}>
-        Delete
-      </Button>
-    </>
-  );
-};
+const ListItem: React.FC<IProps> = ({ item }) => (
+  <>
+    <Text>{item.name}</Text>
+    <Button title="Delete" onPress={() => deleteItem(item)}>
+      Delete
+    </Button>
+  </>
+);
 
 export default ListItem;

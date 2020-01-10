@@ -1,4 +1,5 @@
 import { AsyncStorage } from "react-native";
+import uuidv4 from "uuid/v4";
 
 const ITEMS_KEY = "ITEMS";
 
@@ -7,10 +8,9 @@ export interface Item {
   name: string;
 }
 
-type actionType = (item: Item) => Promise<void>;
-
 // add a new todo
-export const addItem: actionType = async (item: Item) => {
+export const addItem = async (itemName: string) => {
+  const item: Item = { name: itemName, id: uuidv4() };
   try {
     const storedItems: Item[] = JSON.parse(
       await AsyncStorage.getItem(ITEMS_KEY)
@@ -28,7 +28,7 @@ export const addItem: actionType = async (item: Item) => {
 };
 
 // remove an existing todo
-export const deleteItem: actionType = async (item: Item) => {
+export const deleteItem = async (item: Item) => {
   try {
     const storedItems: Item[] = JSON.parse(
       await AsyncStorage.getItem(ITEMS_KEY)
